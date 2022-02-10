@@ -2,24 +2,51 @@ spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: site-goodscenter-manager
+    name: goodscenter
   profiles:
     active: develop
+server:
+  port: 8084
+  http2:
+    enabled: true
+  undertow:
+    buffer-size: 1024
+    direct-buffers: true
+    threads:
+      io: 16
 ---
 spring:
+  profiles: develop
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/user_center?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
   cloud:
     nacos:
       config:
         server-addr: localhost:8848
         file-extension: yaml
-        namespace: site-goodscenter
+        namespace: develop
       discovery:
         enabled: true
         register-enabled: true
         server-addr: localhost:8848
         namespace: ${spring.profiles.active}
         group: ${spring.profiles.active}
-  profiles: develop
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: org.onedayday.*.repository
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+  global-config:
+    db-config:
+      id-type: auto
+      field-strategy: not_empty
+      column-underline: true
+      logic-delete-value: 1
+      logic-not-delete-value: 0
 ---
 spring:
   cloud:

@@ -14,12 +14,36 @@ import java.util.Set;
 
 public interface ${tableInfo.getClassName("Service")}{
 
+    /**
+     * 保存${tableInfo.getClassName("PO")}
+     *
+     * @param ${tableInfo.getClassName("DTO")?uncap_first}
+     * @return
+     */
     int save${tableInfo.getClassName("PO")}(${tableInfo.getClassName("DTO")} ${tableInfo.getClassName("DTO")?uncap_first});
 
+    /**
+     * 批量删除${tableInfo.getClassName("PO")}
+     *
+     * @param ids
+     * @return
+     */
     int delete${tableInfo.getClassName("PO")}(Set<Long> ids);
 
+    /**
+     * 更新${tableInfo.getClassName("PO")}
+     *
+     * @param ${tableInfo.getClassName("DTO")?uncap_first}
+     * @return
+     */
     int update${tableInfo.getClassName("PO")}(${tableInfo.getClassName("DTO")} ${tableInfo.getClassName("DTO")?uncap_first});
 
+    /**
+     * ${tableInfo.getClassName("PO")}分页
+     *
+     * @param pager<${tableInfo.getClassName("DTO")?uncap_first}>
+     * @return
+     */
     PagerResult<${tableInfo.getClassName("DTO")}> getPageResult(Pager<${tableInfo.getClassName("DTO")}> pager);
 
 }

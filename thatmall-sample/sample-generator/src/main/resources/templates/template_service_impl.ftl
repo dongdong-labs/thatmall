@@ -36,21 +36,45 @@ public class ${tableInfo.getClassName("ServiceImpl")}  implements ${tableInfo.ge
 
     private final ${tableInfo.getClassName("DTOConverter")} ${tableInfo.getClassName("DTOConverter")?uncap_first};
 
+    /**
+     * 保存${tableInfo.getClassName("PO")}
+     *
+     * @param ${tableInfo.getClassName("DTO")?uncap_first}
+     * @return
+     */
     @Override
     public int save${tableInfo.getClassName("PO")}(${tableInfo.getClassName("DTO")} ${tableInfo.getClassName("DTO")?uncap_first}) {
         return  ${tableInfo.getClassName("Mapper")?uncap_first}.insert(${tableInfo.getClassName("DTOConverter")?uncap_first}.toSource(${tableInfo.getClassName("DTO")?uncap_first}));
     }
 
+    /**
+     * 批量删除${tableInfo.getClassName("PO")}
+     *
+     * @param ids
+     * @return
+     */
     @Override
     public int delete${tableInfo.getClassName("PO")}(Set<Long> ids) {
         return ${tableInfo.getClassName("Mapper")?uncap_first}.deleteBatchIds(ids);
     }
 
+    /**
+     * 更新${tableInfo.getClassName("PO")}
+     *
+     * @param ${tableInfo.getClassName("DTO")?uncap_first}
+     * @return
+     */
     @Override
     public int update${tableInfo.getClassName("PO")}(${tableInfo.getClassName("DTO")} ${tableInfo.getClassName("DTO")?uncap_first}) {
         return ${tableInfo.getClassName("Mapper")?uncap_first}.updateById(${tableInfo.getClassName("DTOConverter")?uncap_first}.toSource(${tableInfo.getClassName("DTO")?uncap_first}));
     }
 
+    /**
+     * ${tableInfo.getClassName("PO")}分页
+     *
+     * @param pager<${tableInfo.getClassName("DTO")?uncap_first}>
+     * @return
+     */
     @Override
     public  PagerResult<${tableInfo.getClassName("DTO")}> getPageResult(Pager<${tableInfo.getClassName("DTO")}> pager) {
         QueryWrapper<${tableInfo.getClassName("PO")} > queryWrapper = new QueryWrapper<>();
@@ -58,7 +82,7 @@ public class ${tableInfo.getClassName("ServiceImpl")}  implements ${tableInfo.ge
         page.setCurrent(pager.getPage());
         page.setSize(pager.getSize());
         IPage<${tableInfo.getClassName("PO")}> iPage = ${tableInfo.getClassName("Mapper")?uncap_first}.selectPage(page,queryWrapper);
-        PagerResult<${tableInfo.getClassName("DTO")}> result = new PagerResult();
+        PagerResult<${tableInfo.getClassName("DTO")}> result = new PagerResult<>();
         result.setList(${tableInfo.getClassName("DTOConverter")?uncap_first}.toTargetList(iPage.getRecords()));
         result.setTotal((int) iPage.getTotal());
 
