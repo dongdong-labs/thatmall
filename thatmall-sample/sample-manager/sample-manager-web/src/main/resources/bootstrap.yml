@@ -1,0 +1,37 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: site-goodscenter-manager
+  profiles:
+    active: develop
+---
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
+        namespace: site-goodscenter
+      discovery:
+        enabled: true
+        register-enabled: true
+        server-addr: localhost:8848
+        namespace: ${spring.profiles.active}
+        group: ${spring.profiles.active}
+  profiles: develop
+---
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: ${nacos.host}:${nacos.port}
+        file-extension: yaml
+        namespace: site-goodscenter
+      discovery:
+        enabled: true
+        register-enabled: true
+        server-addr: ${nacos.host}:${nacos.port}
+        namespace: ${spring.profiles.active}
+        group: ${spring.profiles.active}
+  profiles: prod
