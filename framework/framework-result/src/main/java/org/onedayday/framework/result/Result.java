@@ -1,20 +1,21 @@
 package org.onedayday.framework.result;
 
-import lombok.Data;
-
 import java.io.Serializable;
 
 /**
- * @author onedayday
+ * @program: framework
+ * @class: Result
+ * @description:
+ * @author: wdd
+ * @create: 2022-02-10 09:40
  */
-@Data
 public class Result<T> implements Serializable {
 
     private static final long serialVersionUID = -1L;
 
     private boolean success = true;
-    private static String code = "200";
-    private static String msg = "SUCCESS";
+    private String code;
+    private String msg = "SUCCESS";
     private T data;
 
     private Result() {
@@ -23,23 +24,22 @@ public class Result<T> implements Serializable {
 
     private Result(boolean success, String code, String msg, T data) {
         this.success = success;
-        this.code = code;
         this.msg = msg;
         this.data = data;
     }
 
     public static <T> Result success() {
-        Result result = new Result(true, code, "", (Object) null);
+        Result result = new Result(true, "200", "", (Object) null);
         return result;
     }
 
     public static <T> Result success(String msg) {
-        Result result = new Result(true, code, msg, (Object) null);
+        Result result = new Result(true, "200", msg, (Object) null);
         return result;
     }
 
     public static <T> Result success(String msg, T data) {
-        Result result = new Result(true, code, msg, data);
+        Result result = new Result(true, "200", msg, data);
         return result;
     }
 
@@ -49,7 +49,7 @@ public class Result<T> implements Serializable {
     }
 
     public static <T> Result data(T data) {
-        Result result = new Result(true, code, "", data);
+        Result result = new Result(true, "200", "", data);
         return result;
     }
 
@@ -67,6 +67,4 @@ public class Result<T> implements Serializable {
         Result result = new Result(false, "-1", errorMsg, null);
         return result;
     }
-
-
 }
