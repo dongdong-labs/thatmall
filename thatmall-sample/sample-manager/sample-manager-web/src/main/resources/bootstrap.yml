@@ -2,7 +2,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: goodscenter
+    name: sample
   profiles:
     active: develop
 server:
@@ -14,6 +14,12 @@ server:
     direct-buffers: true
     threads:
       io: 16
+  servlet:
+    context-path: /sample
+settings:
+  swagger:
+    enable: true
+    basePackage: org.onedayday
 ---
 spring:
   profiles: develop
@@ -28,7 +34,7 @@ spring:
       config:
         server-addr: localhost:8848
         file-extension: yaml
-        namespace: develop
+        namespace: ${spring.application.name}
       discovery:
         enabled: true
         register-enabled: true

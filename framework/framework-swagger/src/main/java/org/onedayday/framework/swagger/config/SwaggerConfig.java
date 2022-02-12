@@ -17,15 +17,19 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableKnife4j
 public class SwaggerConfig {
 
-    @Value("${swagger2.enable:true}")
-    private boolean enableSwagger2;
+    @Value("${settings.swagger.enable:true}")
+    private boolean enableSwagger;
+
+    @Value("${settings.swagger.basepackage:org.onedayday}")
+    private String basePackage;
+
     @Bean
     public Docket docket() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .enable(enableSwagger2)
+                .enable(enableSwagger)
                 .apiInfo(apiInfo())  
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("org.onedayday"))
+                .apis(RequestHandlerSelectors.basePackage(basePackage))
                 .paths(PathSelectors.any())
                 .build()
                 .pathMapping("/");
