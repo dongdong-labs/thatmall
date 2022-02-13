@@ -2,7 +2,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: sample
+    name: samplecenter
   profiles:
     active: develop
 server:

@@ -1,0 +1,69 @@
+server:
+  port: 8888
+management:
+  endpoints:
+    web:
+      exposure:
+        exclude: '*'
+  endpoint:
+    health:
+      show-details: always
+
+spring:
+  application:
+    name: gateway
+  profiles:
+    active: develop
+  main:
+    allow-bean-definition-overriding: true
+
+logging:
+  level:
+    org.springframework.cloud.gateway: trace
+  config: classpath:log4j2.xml
+---
+spring:
+  profiles: develop
+  redis:
+    host: localhost
+    database: 0
+    port: 6379
+    password:
+    timeout: 3000ms
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
+        namespace: ${spring.profiles.active}
+      discovery:
+        server-addr: localhost:8848
+        namespace: ${spring.profiles.active}
+        group: ${spring.profiles.active}
+    gateway:
+      httpclient:
+        pool:
+          max-connections: 5000
+          acquire-timeout: 15000
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedHeaders: "*"
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - OPTION
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: sample
+          uri: lb://sample_center
+          predicates:
+            - Path=/sample/**
+        - id: usercenter
+          uri: lb://usercenter
+          predicates:
+            - Path=/user/**            -
+

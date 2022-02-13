@@ -10,6 +10,18 @@
     <packaging>pom</packaging>
     <modules>
         <module>addresscenter</module>
+        <module>aftersalescenter</module>
+        <module>basecenter</module>
+        <module>cmscenter</module>
+        <module>commentcenter</module>
+        <module>commissioncenter</module>
+        <module>communitycenter</module>
+        <module>framework</module>
+        <module>gatewaycenter</module>
+        <module>goodscenter</module>
+        <module>helpcenter</module>
+        <module>imcenter</module>
+        <module>inventorycenter</module>
     </modules>
 
     <properties>
