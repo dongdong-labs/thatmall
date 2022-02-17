@@ -1,5 +1,7 @@
 package org.onedayday.framework.result;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -9,6 +11,7 @@ import java.io.Serializable;
  * @author: wdd
  * @create: 2022-02-10 09:40
  */
+@Data
 public class Result<T> implements Serializable {
 
     private static final long serialVersionUID = -1L;

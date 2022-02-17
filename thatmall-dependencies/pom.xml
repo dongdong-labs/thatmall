@@ -30,6 +30,7 @@
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <jwt.version>0.9.1</jwt.version>
         <knife4j.version>3.0.3</knife4j.version>
+        <spring.context.support.version>1.0.11</spring.context.support.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -40,7 +41,11 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+            <dependency>
+                <groupId>com.alibaba.spring</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.context.support.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-spring-boot-starter</artifactId>

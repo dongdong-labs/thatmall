@@ -1,0 +1,52 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: authoritycenter
+  profiles:
+    active: develop
+server:
+  port: 8086
+  http2:
+    enabled: true
+  undertow:
+    buffer-size: 1024
+    direct-buffers: true
+    threads:
+      io: 16
+  servlet:
+    context-path: /authority
+nacos:
+  host: localhost
+  port: 8848
+settings:
+  swagger:
+    enable: true
+    basePackage: org.onedayday
+---
+spring:
+  profiles: develop
+  cloud:
+    nacos:
+      config:
+        server-addr: ${nacos.host}:${nacos.port}
+        file-extension: yaml
+        namespace: ${spring.application.name}
+      discovery:
+        enabled: true
+        register-enabled: true
+        server-addr: ${nacos.host}:${nacos.port}
+        namespace: ${spring.profiles.active}
+        group: ${spring.profiles.active}
+
+
+dubbo:
+  application:
+    name: authoritycenter
+  consumer:
+    timeout: 6000
+    check: false
+  registry:
+    address: nacos:// ${nacos.host}:${nacos.port}?namespace=${spring.profiles.active}
+  cloud:
+    subscribed-services: admincenter

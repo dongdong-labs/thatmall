@@ -1,0 +1,55 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: admincenter
+  profiles:
+    active: develop
+server:
+  port: 8085
+  http2:
+    enabled: true
+  undertow:
+    buffer-size: 1024
+    direct-buffers: true
+    threads:
+      io: 16
+  servlet:
+    context-path: /admin
+settings:
+  swagger:
+    enable: true
+    basePackage: org.onedayday
+---
+spring:
+  profiles: develop
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/tm_admincenter?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
+        namespace: ${spring.application.name}
+      discovery:
+        enabled: true
+        register-enabled: true
+        server-addr: localhost:8848
+        namespace: ${spring.profiles.active}
+        group: ${spring.profiles.active}
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: org.onedayday.*.repository
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+  global-config:
+    db-config:
+      id-type: auto
+      field-strategy: not_empty
+      column-underline: true
+      logic-delete-value: 1
+      logic-not-delete-value: 0

@@ -10,7 +10,9 @@
     <packaging>pom</packaging>
     <modules>
         <module>addresscenter</module>
+        <module>admincenter</module>
         <module>aftersalescenter</module>
+        <module>authoritycenter</module>
         <module>basecenter</module>
         <module>cmscenter</module>
         <module>commentcenter</module>
