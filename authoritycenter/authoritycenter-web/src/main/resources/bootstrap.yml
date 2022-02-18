@@ -50,3 +50,5 @@ dubbo:
     address: nacos:// ${nacos.host}:${nacos.port}?namespace=${spring.profiles.active}
   cloud:
     subscribed-services: admincenter
+  protocol:
+    port: -1

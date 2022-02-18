@@ -58,12 +58,12 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: sample
-          uri: lb://sample_center
+        - id: admincenter
+          uri: lb://admincenter
           predicates:
-            - Path=/sample/**
-        - id: usercenter
-          uri: lb://usercenter
+            - Path=/admin/**
+        - id: authoritycenter
+          uri: lb://authoritycenter
           predicates:
-            - Path=/user/**            -
+            - Path=/authority/**                 -
 

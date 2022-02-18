@@ -16,6 +16,9 @@ server:
       io: 16
   servlet:
     context-path: /admin
+nacos:
+  host: localhost
+  port: 8848
 settings:
   swagger:
     enable: true
@@ -53,3 +56,13 @@ mybatis-plus:
       column-underline: true
       logic-delete-value: 1
       logic-not-delete-value: 0
+dubbo:
+  application:
+    name: admincenter
+  protocol:
+    port: -1
+    name: dubbo
+  registry:
+    address: nacos:// ${nacos.host}:${nacos.port}?namespace=${spring.profiles.active}
+  provider:
+    version: 1.0
