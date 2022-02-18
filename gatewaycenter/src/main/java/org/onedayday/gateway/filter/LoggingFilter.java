@@ -25,23 +25,7 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 @Component
 public class LoggingFilter implements GlobalFilter {
-    //    @Override
-//    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-//        String info = String.format("Method:{%s} Host:{%s} Path:{%s} Query:{%s}",
-//                exchange.getRequest().getMethod().name(),
-//                exchange.getRequest().getURI().getHost(),
-//                exchange.getRequest().getURI().getPath(),
-//                exchange.getRequest().getQueryParams());
-//        log.info(info);
-//        exchange.getAttributes().put("START_TIME", System.currentTimeMillis());
-//        return  chain.filter(exchange).then( Mono.fromRunnable(() -> {
-//            Long startTime = exchange.getAttribute("START_TIME");
-//            if(startTime!= null){
-//                Long executeTime = (System.currentTimeMillis() - startTime);
-//                log.info(exchange.getRequest().getURI().getRawPath() +":" + executeTime +"ms");
-//            }
-//        }));
-//    }
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
