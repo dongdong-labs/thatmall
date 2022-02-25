@@ -23,6 +23,16 @@
     <dependencies>
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
             <groupId>org.onedayday</groupId>
             <artifactId>framework-log</artifactId>
             <version>1.0-SNAPSHOT</version>
@@ -30,6 +40,11 @@
         <dependency>
             <groupId>org.onedayday</groupId>
             <artifactId>framework-nacos</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.onedayday</groupId>
+            <artifactId>framework-security</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
@@ -76,6 +91,11 @@
             <artifactId>framework-result</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.onedayday</groupId>
+            <artifactId>framework-utils</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
         <dependency>
             <groupId>org.onedayday</groupId>
@@ -83,16 +103,6 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                    <groupId>org.springframework.boot</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
 
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

@@ -19,6 +19,7 @@ import java.util.Optional;
  */
 @RestController
 public class SwaggerController {
+
     @Autowired(required = false)
     private SecurityConfiguration securityConfiguration;
 

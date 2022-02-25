@@ -36,6 +36,7 @@
         <module>framework-auditLog</module>
         <module>framework-dubbo</module>
         <module>framework-nacos</module>
+        <module>framework-security</module>
     </modules>
 
     <dependencyManagement>

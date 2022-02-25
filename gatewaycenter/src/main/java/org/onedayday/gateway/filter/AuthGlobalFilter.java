@@ -1,6 +1,7 @@
 package org.onedayday.gateway.filter;
 
 import lombok.extern.slf4j.Slf4j;
+import org.onedayday.framework.utils.StringUtil;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.io.buffer.DataBuffer;
@@ -24,24 +25,27 @@ import java.nio.charset.StandardCharsets;
  */
 @Slf4j
 @Component
-public class LoggingFilter implements GlobalFilter {
+public class AuthGlobalFilter implements GlobalFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
+        log.info(String.format("Method:'%s' Host:'%s' Path:'%s' Query:%s", request.getMethod().name(), request.getURI().getHost(), request.getURI().getPath(), request.getQueryParams()));
+
+        String token = request.getHeaders().getFirst("Authorization");
+
+        if (StringUtil.isEmpty(token)) {
+            return chain.filter(exchange);
+        }
+
         String requestMethod = request.getMethodValue();
-        String info = String.format("Method:'%s' Host:'%s' Path:'%s' Query:%s",
-                exchange.getRequest().getMethod().name(),
-                exchange.getRequest().getURI().getHost(),
-                exchange.getRequest().getURI().getPath(),
-                exchange.getRequest().getQueryParams());
-        log.info(info);
+
         if (HttpMethod.POST.toString().equals(requestMethod) || HttpMethod.PUT.toString().equals(requestMethod)) {
             return DataBufferUtils.join(exchange.getRequest().getBody()).flatMap(dataBuffer -> {
                 byte[] bytes = new byte[dataBuffer.readableByteCount()];
                 dataBuffer.read(bytes);
-                String postRequestBodyStr = new String(bytes, StandardCharsets.UTF_8);
-                exchange.getAttributes().put("POST_BODY", postRequestBodyStr);
+                String bodyStr = new String(bytes, StandardCharsets.UTF_8);
+                exchange.getAttributes().put("body", bodyStr);
                 DataBufferUtils.release(dataBuffer);
                 Flux<DataBuffer> cachedFlux = Flux.defer(() -> {
                     DataBuffer buffer = exchange.getResponse().bufferFactory().wrap(bytes);

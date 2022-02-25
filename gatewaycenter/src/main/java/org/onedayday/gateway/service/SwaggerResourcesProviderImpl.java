@@ -25,8 +25,11 @@ import java.util.List;
 @Primary
 @AllArgsConstructor
 public class SwaggerResourcesProviderImpl implements SwaggerResourcesProvider {
+
     private final RouteLocator routeLocator;
+
     private final GatewayProperties gatewayProperties;
+
     @Override
     public List<SwaggerResource> get() {
         List<SwaggerResource> resources = new ArrayList<>();
