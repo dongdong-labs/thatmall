@@ -1,4 +1,4 @@
-package org.onedayday.gateway.service;
+package org.onedayday.gateway.swagger.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

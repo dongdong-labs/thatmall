@@ -1,4 +1,4 @@
-package org.onedayday.gateway.controller;
+package org.onedayday.gateway.swagger.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
